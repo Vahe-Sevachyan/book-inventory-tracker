@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Book Information Modal</title>
+    <style>
+      /* Modal Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 500px;
+      }
+
+      /* Form Styles */
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      label {
+        display: block;
+        font-weight: bold;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 5px;
+      }
+
+      button {
+        padding: 10px 15px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Book Information Modal</h2>
+    <button onclick="openModal()">Open Modal</button>
+
+    <div id="bookModal" class="modal">
+      <div class="modal-content">
+        <h3>Enter Book Information</h3>
+        <div class="form-group">
+          <label for="title">Title:</label>
+          <input type="text" id="title" placeholder="Enter the book's title" />
+        </div>
+        <div class="form-group">
+          <label for="author">Author:</label>
+          <input
+            type="text"
+            id="author"
+            placeholder="Enter the book's author"
+          />
+        </div>
+        <div class="form-group">
+          <label for="publicationYear">Publication Year:</label>
+          <input
+            type="text"
+            id="publicationYear"
+            placeholder="Enter the book's publication year"
+          />
+        </div>
+        <div class="form-group">
+          <label for="genre">Genre:</label>
+          <input type="text" id="genre" placeholder="Enter the book's genre" />
+        </div>
+        <button onclick="saveBook()">Save</button>
+        <button onclick="removeBook()">Remove</button>
+        <button onclick="closeModal()">Close</button>
+      </div>
+    </div>
+
+    <div id="displayInfo"></div>
+
+    <script>
+      class Book {
+        constructor(title, author, publicationYear, genre) {
+          this.title = title;
+          this.author = author;
+          this.publicationYear = publicationYear;
+          this.genre = genre;
+        }
+
+        getTitle() {
+          return this.title;
+        }
+
+        getAuthor() {
+          return this.author;
+        }
+
+        getPublicationYear() {
+          return this.publicationYear;
+        }
+
+        getGenre() {
+          return this.genre;
+        }
+
+        getBookInfo() {
+          return `Title: ${this.title}<br>Author: ${this.author}<br>Publication Year: ${this.publicationYear}<br>Genre: ${this.genre}`;
+        }
+      }
+
+      const modal = document.getElementById("bookModal");
+      const displayInfo = document.getElementById("displayInfo");
+      let book;
+
+      function openModal() {
+        modal.style.display = "block";
+      }
+
+      function closeModal() {
+        modal.style.display = "none";
+      }
+
+      function saveBook() {
+        const title = document.getElementById("title").value;
+        const author = document.getElementById("author").value;
+        const publicationYear =
+          document.getElementById("publicationYear").value;
+        const genre = document.getElementById("genre").value;
+
+        book = new Book(title, author, publicationYear, genre);
+        displayInfo.innerHTML = book.getBookInfo();
+      }
+
+      function removeBook() {
+        displayInfo.innerHTML = "";
+        book = null;
+      }
+    </script>
+  </body>
+</html>
