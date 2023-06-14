@@ -27,6 +27,24 @@ class Book {
   getBookInfo() {
     return `Title: ${this.title}<br>Author: ${this.author}<br>Publication Year: ${this.publicationYear}<br>Genre: ${this.genre}`;
   }
+  getBookItem() {
+    const bookItem = document.createElement("div");
+    bookItem.setAttribute("class", "bookItem");
+
+    const removeBtn = document.createElement("button");
+    removeBtn.innerHTML = "Delete";
+
+    bookItem.innerHTML = this.getBookInfo() + "<br>";
+    bookItem.appendChild(removeBtn);
+
+    removeBtn.addEventListener("click", () => this.removeBookItem(bookItem));
+
+    return bookItem;
+  }
+
+  removeBookItem(bookItem) {
+    bookItem.remove();
+  }
 }
 
 function openModal() {
@@ -36,17 +54,6 @@ function openModal() {
 function closeModal() {
   modal.style.display = "none";
 }
-// modal.addEventListener("click", openModal());
-// function addRemoveBtn() {
-//   const btn = document.createElement("BUTTON");
-//   btn.innerHTML = "Delete";
-//   bookInfoDiv.appendChild(btn);
-//   //
-// }
-
-// removeBtn.forEach((btn) => {
-//   btn.addEventListener("click", removeBookBtn());
-// });
 
 function removeBookBtn() {
   bookInfoDiv.innerHTML = "";
@@ -59,10 +66,15 @@ function addBook() {
   const publicationYear = document.getElementById("publicationYear").value;
   const genre = document.getElementById("genre").value;
   const book = new Book(title, author, publicationYear, genre);
-  bookInfoDiv.innerHTML += book.getBookInfo() + "<hr>";
+  // const bookItem = document.createElement("div");
+  bookItem.setAttribute("class", "bookItem");
   const removeBtn = document.createElement("BUTTON");
   removeBtn.setAttribute("ID", "removeBtn");
   removeBtn.innerHTML = "Delete";
-  bookInfoDiv.appendChild(removeBtn);
+  bookItem.innerHTML = book.getBookInfo() + "<br>";
+  bookItem.appendChild(removeBtn);
+  bookInfoDiv.append(bookItem);
+  const bookItem = book.getBookItem();
+  bookInfoDiv.append(bookItem);
   closeModal();
 }
