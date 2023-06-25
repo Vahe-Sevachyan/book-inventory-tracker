@@ -8,77 +8,40 @@
     <title>Book Inventory Tracker</title>
   </head>
   <body>
-    <h2>Book Category Management</h2>
-    <div class="search-bar">
-      <label for="searchInput">Search Books</label>
-      <input type="text" id="searchInput" placeholder="Search..." />
-    </div>
-    <button onclick="openModal('category')">Create Category</button>
-
-    <div id="categoryModal" class="modal">
-      <div class="modal-content">
-        <h3>Create Category</h3>
-        <div class="form-group">
-          <label for="categoryName">Category Name:</label>
-          <input
-            type="text"
-            id="categoryName"
-            placeholder="Enter the category name"
-            onkeydown="handleCategoryInput(event)"
-          />
-        </div>
-        <button onclick="createCategory()">Create</button>
-        <button onclick="closeModal('category')">Close</button>
-      </div>
-    </div>
-
-    <div id="bookModal" class="modal">
-      <div class="modal-content">
-        <h3>Add/Edit Book</h3>
+    <div class="container">
+      <h2>Book Inventory</h2>
+      <button class="createBook">Add Book</button>
+      <div id="bookModal" class="modal">
+        <div class="modal-content"></div>
+        <h3>Enter Book Information</h3>
+        <!-- Group 1  -->
         <div class="form-group">
           <label for="title">Title:</label>
-          <input
-            type="text"
-            id="bookTitle"
-            placeholder="Enter the book title"
-            onkeydown="handleBookInput(event)"
-          />
+          <input type="text" id="title" placeholder="Enter Book Title" />
         </div>
+        <!-- Group 2 -->
         <div class="form-group">
           <label for="author">Author:</label>
           <input
             type="text"
-            id="bookAuthor"
-            placeholder="Enter the book author"
-            onkeydown="handleBookInput(event)"
+            id="author"
+            placeholder="Enter the book's author"
           />
         </div>
+        <!-- Group 3 -->
         <div class="form-group">
-          <label for="publicationYear">Publication Year:</label>
+          <label for="publicationYear">Number of Pages</label>
           <input
             type="text"
-            id="bookPublicationYear"
-            placeholder="Enter the publication year"
-            onkeydown="handleBookInput(event)"
+            id="publicationYear"
+            placeholder="Enter the number of pages"
           />
         </div>
-        <div class="form-group">
-          <label for="genre">Genre:</label>
-          <input
-            type="text"
-            id="bookGenre"
-            placeholder="Enter the book genre"
-            onkeydown="handleBookInput(event)"
-          />
-        </div>
-        <input type="hidden" id="bookIndex" />
-        <button id="addEditBookButton" onclick="addEditBook()">Add</button>
-        <button onclick="closeModal('book')">Close</button>
+        <button class="saveBtn">Save</button>
+        <button class="closeBtn">Close</button>
       </div>
+      <div class="bookList"></div>
     </div>
-
-    <div id="categoryList"></div>
-
     <script src="index.js"></script>
   </body>
 </html>
