@@ -11,9 +11,6 @@ createBook.onclick = () => {
 closeBtn.onclick = () => {
   closeModal();
 };
-saveBtn.onclick = () => {
-  saveBook();
-};
 
 function openModal() {
   modal.style.display = "block";
@@ -42,4 +39,19 @@ class Book {
   getBookInfo() {
     return `Title:${title}<br>Author:${author}<br> Publication Year:${publicationYear}<br> Genre:${genre}`;
   }
+}
+saveBtn.onclick = () => {
+  saveBook();
+};
+function saveBook() {
+  const title = document.getElementById("title").value;
+  const author = document.getElementById("author").value;
+  const publicationYear = document.getElementById("publicationYear").value;
+  const genre = document.getElementById("genre").value;
+
+  const book = new Book(title, author, publicationYear, genre);
+  books.push(book);
+  displayBook();
+  resetModal();
+  closeModal();
 }
