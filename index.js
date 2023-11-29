@@ -35,6 +35,7 @@ function saveBook() {
   const genre = document.getElementById("genre").value;
   const newBook = new Book(title, author, publicationYear, genre);
   books.push(newBook);
+  displayBooks();
 }
 
 function displayBooks() {
@@ -52,8 +53,11 @@ function displayBooks() {
     bookList.appendChild(bookItem);
   });
 }
-
-bookList.appendChild(addedBook);
+function removeBook(index) {
+  books.splice(index, 1);
+  displayBooks();
+}
+// bookList.appendChild(addedBook);
 // `<ul>
 //   <li>Title: ${book.title}</li>
 //   <li>Author: ${book.author}</li>
