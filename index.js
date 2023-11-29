@@ -2,7 +2,8 @@ const addBookBtn = document.querySelector(".create-book-btn");
 const modal = document.querySelector(".modal");
 const closeBtn = document.querySelector(".close-btn");
 const saveBtn = document.querySelector(".save-btn");
-const myLibrary = [];
+const bookList = document.querySelector(".book-list");
+const books = [];
 
 function addBookToLibrary() {}
 
@@ -12,7 +13,6 @@ addBookBtn.onclick = () => {
 closeBtn.onclick = () => {
   modal.style.display = "none";
 };
-
 saveBtn.onclick = () => {
   saveBook();
 };
@@ -28,16 +28,35 @@ function Book(title, author, publicationYear, genre) {
 const newBook = new Book("atomic habits", "James Clear", 2012, "kaizen");
 console.log(newBook);
 
-//next work on the functionality to save the information to the array
-// take the info from the input element and pass it to the book constructor save it in a variable maybe and push it to the array
-
 function saveBook() {
   const title = document.getElementById("title").value;
   const author = document.getElementById("author").value;
   const publicationYear = document.getElementById("publicationYear").value;
   const genre = document.getElementById("genre").value;
-
   const newBook = new Book(title, author, publicationYear, genre);
-  myLibrary.push(newBook);
-  console.log(myLibrary);
+  books.push(newBook);
 }
+
+function displayBooks() {
+  bookList.innerHTML = "";
+  books.forEach((book, i) => {
+    const bookInfo = book.getInfo();
+    const bookItem = document.createElement("div");
+    bookItem.innerHTML = bookInfo;
+    const removeButton = document.createElement("button");
+    removeButton.innerHTML = "Remove Button";
+    removeButton.onclick = () => {
+      removeBook(i);
+    };
+    bookItem.appendChild(removeButton);
+    bookList.appendChild(bookItem);
+  });
+}
+
+bookList.appendChild(addedBook);
+// `<ul>
+//   <li>Title: ${book.title}</li>
+//   <li>Author: ${book.author}</li>
+//   <li>PublicationYear: ${book.publicationYear}</li>
+//   <li>Genre: ${book.genre}</li>
+//   </ul>`;
