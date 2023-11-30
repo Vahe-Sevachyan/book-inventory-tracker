@@ -11,7 +11,7 @@ addBookBtn.onclick = () => {
   modal.style.display = "block";
 };
 closeBtn.onclick = () => {
-  modal.style.display = "none";
+  closeModal();
 };
 saveBtn.onclick = () => {
   saveBook();
@@ -25,8 +25,7 @@ function Book(title, author, publicationYear, genre) {
     return `Title: ${this.title} Author:${this.author} Publication Year: ${this.publicationYear} Genre: ${this.genre}`;
   };
 }
-const newBook = new Book("atomic habits", "James Clear", 2012, "kaizen");
-console.log(newBook);
+// const newBook = new Book("atomic habits", "James Clear", 2012, "kaizen");
 
 function saveBook() {
   const title = document.getElementById("title").value;
@@ -36,8 +35,12 @@ function saveBook() {
   const newBook = new Book(title, author, publicationYear, genre);
   books.push(newBook);
   displayBooks();
+  resetModal();
+  closeModal();
 }
-
+function closeModal() {
+  modal.style.display = "none";
+}
 function displayBooks() {
   bookList.innerHTML = "";
   books.forEach((book, i) => {
@@ -57,10 +60,9 @@ function removeBook(index) {
   books.splice(index, 1);
   displayBooks();
 }
-// bookList.appendChild(addedBook);
-// `<ul>
-//   <li>Title: ${book.title}</li>
-//   <li>Author: ${book.author}</li>
-//   <li>PublicationYear: ${book.publicationYear}</li>
-//   <li>Genre: ${book.genre}</li>
-//   </ul>`;
+function resetModal() {
+  document.getElementById("title").value = "";
+  document.getElementById("author").value = "";
+  document.getElementById("publicationYear").value = "";
+  document.getElementById("genre").value = "";
+}
